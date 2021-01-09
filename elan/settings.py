@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'managers',
     'ambassadors',
     'tasks',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -56,8 +58,21 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ]
 }
+
+SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-pnzyw8u5.us.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = 'LUuFfCbraVkLXS5K59PSGiaCkrtGvFPQ'
+SOCIAL_AUTH_AUTH0_SECRET = 'YOUR_CLIENT_SECRET'
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile',
+    'email'
+]
 
 ROOT_URLCONF = 'elan.urls'
 
