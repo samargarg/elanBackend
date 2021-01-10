@@ -11,7 +11,7 @@ class CreateNewTask(APIView):
     def post(self, request):
         title = request.data.get('title')
         description = request.data.get('description')
-        ass
+        pass
 
 
 

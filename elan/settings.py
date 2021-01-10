@@ -41,9 +41,8 @@ INSTALLED_APPS = [
     'managers',
     'ambassadors',
     'tasks',
+    'auth0authorization',
     'rest_framework',
-    'rest_framework.authtoken',
-    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +51,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # Added
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -59,20 +60,31 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ]
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
-SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-pnzyw8u5.us.auth0.com'
-SOCIAL_AUTH_AUTH0_KEY = 'LUuFfCbraVkLXS5K59PSGiaCkrtGvFPQ'
-SOCIAL_AUTH_AUTH0_SECRET = 'YOUR_CLIENT_SECRET'
-SOCIAL_AUTH_AUTH0_SCOPE = [
-    'openid',
-    'profile',
-    'email'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
 ]
+
+JWT_AUTH = {
+    'JWT_PAYLOAD_GET_USERNAME_HANDLER':
+        'auth0authorization.utils.jwt_get_username_from_payload_handler',
+    'JWT_DECODE_HANDLER':
+        'auth0authorization.utils.jwt_decode_token',
+    'JWT_ALGORITHM': 'RS256',
+    'JWT_AUDIENCE': 'https://quickstarts/api',
+    'JWT_ISSUER': 'https://dev-pnzyw8u5.us.auth0.com/',
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+}
 
 ROOT_URLCONF = 'elan.urls'
 

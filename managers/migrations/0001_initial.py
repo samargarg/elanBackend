@@ -12,15 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Applicant',
+            name='ManagerDetail',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=45)),
-                ('password', models.CharField(max_length=45)),
-                ('institute', models.CharField(max_length=200)),
-                ('phone', models.CharField(max_length=10)),
-                ('instagram', models.CharField(blank=True, max_length=200, null=True)),
-                ('facebook', models.CharField(blank=True, max_length=200, null=True)),
             ],
         ),
     ]
