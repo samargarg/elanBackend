@@ -81,8 +81,8 @@ JWT_AUTH = {
     'JWT_DECODE_HANDLER':
         'auth0authorization.utils.jwt_decode_token',
     'JWT_ALGORITHM': 'RS256',
-    'JWT_AUDIENCE': 'https://quickstarts/api',
-    'JWT_ISSUER': 'https://dev-pnzyw8u5.us.auth0.com/',
+    'JWT_AUDIENCE': 'https://phantom168.us.auth0.com/api/v2/',
+    'JWT_ISSUER': 'https://phantom168.us.auth0.com/',
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
 
