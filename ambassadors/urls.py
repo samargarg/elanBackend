@@ -3,6 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path('getAmbassadorsData/', views.GetAmbassadorsData.as_view(), name="getAmbassadorsData"),
-    path('getAmbassadorProfile/', views.GetAmbassadorProfile.as_view(), name="getAmbassadorProfile")
+    path('addNewAmbassador/', views.addNewAmbassador, name="addNewAmbassador"),
+    path('getAmbassadorsData/', views.getAmbassadorsData, name="getAmbassadorsData"),
+    path('getAmbassadorProfile/', views.getAmbassadorProfile, name="getAmbassadorProfile"),
+    path('getLeaderBoardRecords/', views.getLeaderBoardRecords, name="getLeaderBoardRecords")
 ]
